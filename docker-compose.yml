@@ -1,0 +1,5 @@
+version: '3.8'
+services:
+  sistema-orcamentos:
+    build: .
+    container_name: sistema-orcamentos-app
