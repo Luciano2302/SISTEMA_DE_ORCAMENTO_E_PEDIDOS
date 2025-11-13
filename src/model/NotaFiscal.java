@@ -17,8 +17,16 @@ public class NotaFiscal extends BaseEntity {
         this.valorTotal = fatura.getValorTotal();
     }
 
-    public int getNumero() { return numero; }
-    public LocalDateTime getData() { return data; }
-    public double getValorTotal() { return valorTotal; }
-    public Fatura getFatura() { return fatura; }
+    public int getNumero() {
+        return numero;
+    }
+    public LocalDateTime getData() {
+        return data;
+    }
+    public double getValorTotal() {
+        return valorTotal;
+    }
+    public Fatura getFatura() {
+        return fatura;
+    }
 }

@@ -3,7 +3,7 @@ package model;
 import model.enums.StatusPedido;
 import java.time.LocalDateTime;
 
-public class Pedido extends AbstractStatusEntity<StatusPedido> {
+public class Pedido extends AbstractStatusEntity < StatusPedido > {
     private static int contador = 1;
     private int numero;
     private LocalDateTime data;
@@ -36,8 +36,16 @@ public class Pedido extends AbstractStatusEntity<StatusPedido> {
         changeStatus(StatusPedido.CANCELADO);
     }
 
-    public int getNumero() { return numero; }
-    public LocalDateTime getData() { return data; }
-    public Orcamento getOrcamento() { return orcamento; }
-    public StatusPedido getStatus() { return getCurrentStatus(); }
+    public int getNumero() {
+        return numero;
+    }
+    public LocalDateTime getData() {
+        return data;
+    }
+    public Orcamento getOrcamento() {
+        return orcamento;
+    }
+    public StatusPedido getStatus() {
+        return getCurrentStatus();
+    }
 }

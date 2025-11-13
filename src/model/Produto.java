@@ -25,8 +25,12 @@ public class Produto extends ItemVendavel {
         estoque += quantidade;
     }
 
-    public int getEstoque() { return estoque; }
-    public void setEstoque(int estoque) { this.estoque = estoque; }
+    public int getEstoque() {
+        return estoque;
+    }
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
 
     @Override
     public String toString() {

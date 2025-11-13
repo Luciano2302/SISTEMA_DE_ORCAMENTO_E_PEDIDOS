@@ -61,12 +61,9 @@ public class GerarFaturaMenuOption implements MenuOption {
             try {
                 var fatura = useCase.execute(pedidoSelecionado.get());
                 faturaRepository.salvar(fatura);
-                
-                // Pagar a fatura automaticamente (como no fluxo original)
                 faturaService.pagarFatura(fatura);
                 faturaRepository.salvar(fatura);
                 
-                // Emitir nota fiscal
                 var notaFiscal = faturaService.emitirNotaFiscal(fatura);
                 
                 System.out.println("✅ Fatura #" + fatura.getNumero() + " gerada com sucesso!");

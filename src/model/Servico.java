@@ -13,8 +13,12 @@ public class Servico extends ItemVendavel {
         return true;
     }
 
-    public int getDuracaoHoras() { return duracaoHoras; }
-    public void setDuracaoHoras(int duracaoHoras) { this.duracaoHoras = duracaoHoras; }
+    public int getDuracaoHoras() {
+        return duracaoHoras;
+    }
+    public void setDuracaoHoras(int duracaoHoras) {
+        this.duracaoHoras = duracaoHoras;
+    }
 
     @Override
     public String toString() {

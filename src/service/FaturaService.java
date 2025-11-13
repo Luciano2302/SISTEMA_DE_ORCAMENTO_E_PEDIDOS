@@ -4,7 +4,7 @@ import model.Fatura;
 import model.Pedido;
 import model.NotaFiscal;
 import model.enums.StatusPedido;
-import model.enums.StatusFatura; // ADICIONE ESTE IMPORT
+import model.enums.StatusFatura;
 
 public class FaturaService {
 

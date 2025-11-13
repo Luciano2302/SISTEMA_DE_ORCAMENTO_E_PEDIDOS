@@ -4,17 +4,17 @@ import model.enums.StatusOrcamento;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Orcamento extends AbstractStatusEntity<StatusOrcamento> {
+public class Orcamento extends AbstractStatusEntity < StatusOrcamento > {
     private static int contador = 1;
     private int numero;
     private Cliente cliente;
-    private List<ItemOrcamento> itens;
+    private List < ItemOrcamento > itens;
 
     public Orcamento(Cliente cliente) {
         super(StatusOrcamento.RASCUNHO);
         this.numero = contador++;
         this.cliente = cliente;
-        this.itens = new ArrayList<>();
+        this.itens = new ArrayList < > ();
     }
 
     public void adicionarItem(ItemVendavel item, int quantidade) {
@@ -45,8 +45,16 @@ public class Orcamento extends AbstractStatusEntity<StatusOrcamento> {
         changeStatus(StatusOrcamento.CANCELADO);
     }
 
-    public int getNumero() { return numero; }
-    public Cliente getCliente() { return cliente; }
-    public List<ItemOrcamento> getItens() { return itens; }
-    public StatusOrcamento getStatus() { return getCurrentStatus(); }
+    public int getNumero() {
+        return numero;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public List < ItemOrcamento > getItens() {
+        return itens;
+    }
+    public StatusOrcamento getStatus() {
+        return getCurrentStatus();
+    }
 }

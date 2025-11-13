@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== SISTEMA DE GESTÃO DE ORÇAMENTOS E PEDIDOS (SOLID) ===\n");
         
-        // Inicialização de dependências
         var produtoRepository = new ProdutoRepositoryImpl();
         var servicoRepository = new ServicoRepositoryImpl();
         var clienteRepository = new ClienteRepositoryImpl();
@@ -22,7 +21,6 @@ public class Main {
         var faturaService = new FaturaService();
         var scanner = new Scanner(System.in);
         
-        // Configuração das opções do menu
         List<MenuOption> menuOptions = Arrays.asList(
             new CadastrarProdutoMenuOption(new CadastrarProdutoUseCase(produtoRepository), scanner),
             new CadastrarServicoMenuOption(new CadastrarServicoUseCase(servicoRepository), scanner),
@@ -66,7 +64,6 @@ public class Main {
             new ListarFaturasMenuOption(faturaRepository)
         );
         
-        // Criação e execução do menu
         Menu menu = new MenuPrincipal(menuOptions, scanner);
         menu.executar();
         

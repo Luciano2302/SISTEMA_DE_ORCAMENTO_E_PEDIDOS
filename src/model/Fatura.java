@@ -3,7 +3,7 @@ package model;
 import model.enums.StatusFatura;
 import java.time.LocalDateTime;
 
-public class Fatura extends AbstractStatusEntity<StatusFatura> {
+public class Fatura extends AbstractStatusEntity < StatusFatura > {
     private static int contador = 1;
     private int numero;
     private LocalDateTime data;
@@ -30,9 +30,19 @@ public class Fatura extends AbstractStatusEntity<StatusFatura> {
         changeStatus(StatusFatura.ATRASADA);
     }
 
-    public int getNumero() { return numero; }
-    public LocalDateTime getData() { return data; }
-    public double getValorTotal() { return valorTotal; }
-    public Pedido getPedido() { return pedido; }
-    public StatusFatura getStatus() { return getCurrentStatus(); }
+    public int getNumero() {
+        return numero;
+    }
+    public LocalDateTime getData() {
+        return data;
+    }
+    public double getValorTotal() {
+        return valorTotal;
+    }
+    public Pedido getPedido() {
+        return pedido;
+    }
+    public StatusFatura getStatus() {
+        return getCurrentStatus();
+    }
 }

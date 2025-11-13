@@ -46,7 +46,6 @@ public class CriarOrcamentoMenuOption implements MenuOption {
     public void execute() {
         System.out.println("\n=== CRIAR ORÇAMENTO ===");
         
-        // Listar e selecionar cliente
         var clientes = listarClientesUseCase.execute(null);
         if (clientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado. Cadastre um cliente primeiro.");
@@ -67,7 +66,6 @@ public class CriarOrcamentoMenuOption implements MenuOption {
         Orcamento orcamento = criarOrcamentoUseCase.execute(cliente);
         System.out.println("✅ Orçamento #" + orcamento.getNumero() + " criado para: " + cliente.getNome());
         
-        // Adicionar itens
         boolean continuar = true;
         while (continuar) {
             System.out.println("\n=== ADICIONAR ITEM ===");
@@ -85,7 +83,6 @@ public class CriarOrcamentoMenuOption implements MenuOption {
             }
         }
         
-        // Resumo do orçamento
         System.out.println("\n=== RESUMO DO ORÇAMENTO ===");
         System.out.println("Itens no orçamento:");
         for (var item : orcamento.getItens()) {
