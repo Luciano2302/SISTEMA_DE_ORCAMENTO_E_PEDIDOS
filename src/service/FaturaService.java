@@ -4,6 +4,7 @@ import model.Fatura;
 import model.Pedido;
 import model.NotaFiscal;
 import model.enums.StatusPedido;
+import model.enums.StatusFatura; // ADICIONE ESTE IMPORT
 
 public class FaturaService {
 
@@ -17,13 +18,13 @@ public class FaturaService {
     }
 
     public NotaFiscal emitirNotaFiscal(Fatura fatura) {
-        if (fatura.getStatus() == model.enums.StatusFatura.PAGA) {
+        if (fatura.getStatus() == StatusFatura.PAGA) { 
             return new NotaFiscal(fatura);
         }
         throw new IllegalStateException("Fatura não está paga");
     }
 
     public void pagarFatura(Fatura fatura) {
-        fatura.setStatus(model.enums.StatusFatura.PAGA);
+        fatura.pagar();
     }
 }

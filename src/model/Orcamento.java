@@ -3,61 +3,50 @@ package model;
 import model.enums.StatusOrcamento;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
-public class Orcamento {
+public class Orcamento extends AbstractStatusEntity<StatusOrcamento> {
     private static int contador = 1;
-
     private int numero;
-    private Date data;
     private Cliente cliente;
-    private StatusOrcamento status;
-    private List < ItemOrcamento > itens;
+    private List<ItemOrcamento> itens;
 
     public Orcamento(Cliente cliente) {
+        super(StatusOrcamento.RASCUNHO);
         this.numero = contador++;
-        this.data = new Date();
         this.cliente = cliente;
-        this.status = StatusOrcamento.RASCUNHO;
-        this.itens = new ArrayList < > ();
+        this.itens = new ArrayList<>();
     }
 
     public void adicionarItem(ItemVendavel item, int quantidade) {
-        ItemOrcamento itemOrcamento = new ItemOrcamento(item, quantidade);
-        itens.add(itemOrcamento);
+        if (!item.isDisponivel(quantidade)) {
+            throw new IllegalArgumentException("Item não disponível na quantidade solicitada");
+        }
+        itens.add(new ItemOrcamento(item, quantidade));
+        setUpdatedAt(java.time.LocalDateTime.now());
     }
 
     public double calcularValorTotal() {
-        return itens.stream()
-            .mapToDouble(ItemOrcamento::getValorTotal)
-            .sum();
-    }
-
-    public void aprovar() {
-        if (this.status == StatusOrcamento.AGUARDANDO_APROVACAO) {
-            this.status = StatusOrcamento.APROVADO;
-        }
+        return itens.stream().mapToDouble(ItemOrcamento::getValorTotal).sum();
     }
 
     public void enviarParaAprovacao() {
-        if (this.status == StatusOrcamento.RASCUNHO) {
-            this.status = StatusOrcamento.AGUARDANDO_APROVACAO;
-        }
+        changeStatus(StatusOrcamento.AGUARDANDO_APROVACAO);
     }
 
-    public int getNumero() {
-        return numero;
+    public void aprovar() {
+        changeStatus(StatusOrcamento.APROVADO);
     }
-    public Date getData() {
-        return data;
+
+    public void rejeitar() {
+        changeStatus(StatusOrcamento.REJEITADO);
     }
-    public Cliente getCliente() {
-        return cliente;
+
+    public void cancelar() {
+        changeStatus(StatusOrcamento.CANCELADO);
     }
-    public StatusOrcamento getStatus() {
-        return status;
-    }
-    public List < ItemOrcamento > getItens() {
-        return itens;
-    }
+
+    public int getNumero() { return numero; }
+    public Cliente getCliente() { return cliente; }
+    public List<ItemOrcamento> getItens() { return itens; }
+    public StatusOrcamento getStatus() { return getCurrentStatus(); }
 }

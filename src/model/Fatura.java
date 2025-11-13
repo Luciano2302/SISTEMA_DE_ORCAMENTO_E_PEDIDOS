@@ -1,42 +1,38 @@
 package model;
 
 import model.enums.StatusFatura;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class Fatura {
+public class Fatura extends AbstractStatusEntity<StatusFatura> {
     private static int contador = 1;
-
     private int numero;
-    private Date data;
+    private LocalDateTime data;
     private double valorTotal;
-    private StatusFatura status;
     private Pedido pedido;
 
     public Fatura(Pedido pedido) {
+        super(StatusFatura.ABERTA);
         this.numero = contador++;
-        this.data = new Date();
+        this.data = LocalDateTime.now();
         this.pedido = pedido;
         this.valorTotal = pedido.getValorTotal();
-        this.status = StatusFatura.ABERTA;
     }
 
-    public int getNumero() {
-        return numero;
-    }
-    public Date getData() {
-        return data;
-    }
-    public double getValorTotal() {
-        return valorTotal;
-    }
-    public StatusFatura getStatus() {
-        return status;
-    }
-    public Pedido getPedido() {
-        return pedido;
+    public void pagar() {
+        changeStatus(StatusFatura.PAGA);
     }
 
-    public void setStatus(StatusFatura status) {
-        this.status = status;
+    public void cancelar() {
+        changeStatus(StatusFatura.CANCELADA);
     }
+
+    public void marcarComoAtrasada() {
+        changeStatus(StatusFatura.ATRASADA);
+    }
+
+    public int getNumero() { return numero; }
+    public LocalDateTime getData() { return data; }
+    public double getValorTotal() { return valorTotal; }
+    public Pedido getPedido() { return pedido; }
+    public StatusFatura getStatus() { return getCurrentStatus(); }
 }

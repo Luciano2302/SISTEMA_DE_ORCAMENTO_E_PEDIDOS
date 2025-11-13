@@ -15,13 +15,12 @@ public class ItemOrcamento {
         return quantidade * precoUnitario;
     }
 
-    public ItemVendavel getItem() {
-        return item;
-    }
-    public int getQuantidade() {
-        return quantidade;
-    }
-    public double getPrecoUnitario() {
-        return precoUnitario;
+    public ItemVendavel getItem() { return item; }
+    public int getQuantidade() { return quantidade; }
+    public double getPrecoUnitario() { return precoUnitario; }
+
+    @Override
+    public String toString() {
+        return String.format("%s x %d = R$ %.2f", item.getDescricao(), quantidade, getValorTotal());
     }
 }

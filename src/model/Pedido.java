@@ -1,21 +1,19 @@
 package model;
 
 import model.enums.StatusPedido;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class Pedido {
+public class Pedido extends AbstractStatusEntity<StatusPedido> {
     private static int contador = 1;
-
     private int numero;
-    private Date data;
+    private LocalDateTime data;
     private Orcamento orcamento;
-    private StatusPedido status;
 
     public Pedido(Orcamento orcamento) {
+        super(StatusPedido.ABERTO);
         this.numero = contador++;
-        this.data = new Date();
+        this.data = LocalDateTime.now();
         this.orcamento = orcamento;
-        this.status = StatusPedido.ABERTO;
     }
 
     public double getValorTotal() {
@@ -23,23 +21,23 @@ public class Pedido {
     }
 
     public void confirmar() {
-        this.status = StatusPedido.CONFIRMADO;
+        changeStatus(StatusPedido.CONFIRMADO);
     }
 
     public void faturar() {
-        this.status = StatusPedido.FATURADO;
+        changeStatus(StatusPedido.FATURADO);
     }
 
-    public int getNumero() {
-        return numero;
+    public void entregar() {
+        changeStatus(StatusPedido.ENTREGUE);
     }
-    public Date getData() {
-        return data;
+
+    public void cancelar() {
+        changeStatus(StatusPedido.CANCELADO);
     }
-    public Orcamento getOrcamento() {
-        return orcamento;
-    }
-    public StatusPedido getStatus() {
-        return status;
-    }
+
+    public int getNumero() { return numero; }
+    public LocalDateTime getData() { return data; }
+    public Orcamento getOrcamento() { return orcamento; }
+    public StatusPedido getStatus() { return getCurrentStatus(); }
 }

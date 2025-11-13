@@ -1,32 +1,24 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class NotaFiscal {
+public class NotaFiscal extends BaseEntity {
     private static int contador = 1;
-
     private int numero;
-    private Date data;
+    private LocalDateTime data;
     private double valorTotal;
     private Fatura fatura;
 
     public NotaFiscal(Fatura fatura) {
+        super();
         this.numero = contador++;
-        this.data = new Date();
+        this.data = LocalDateTime.now();
         this.fatura = fatura;
         this.valorTotal = fatura.getValorTotal();
     }
 
-    public int getNumero() {
-        return numero;
-    }
-    public Date getData() {
-        return data;
-    }
-    public double getValorTotal() {
-        return valorTotal;
-    }
-    public Fatura getFatura() {
-        return fatura;
-    }
+    public int getNumero() { return numero; }
+    public LocalDateTime getData() { return data; }
+    public double getValorTotal() { return valorTotal; }
+    public Fatura getFatura() { return fatura; }
 }
